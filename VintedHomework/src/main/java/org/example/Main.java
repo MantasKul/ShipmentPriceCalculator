@@ -17,12 +17,32 @@ public class Main {
             Scanner sc = new Scanner(file);
 
             while(sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+                String nextLine = sc.nextLine();
+
+                if(isLineValid(nextLine)) {
+                    System.out.println(nextLine + " Valid");
+                } else {
+                    System.out.println(nextLine + " Ignored");
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to find a file");
         }
+    }
+
+    public static boolean isLineValid(String line) {
+        // Regex to check if format is correct WIP: "\d{4}-\d{2}-\d{2} [S,M,L] (LP|MR)"
+        if(line.matches("\\d{4}-\\d{2}-\\d{2} [S,M,L] (LP|MR)")) return true;
+        return false;
+    }
+
+    public static float getMonthDiscount() {
+        return 0.00f;
+    }
+
+    public static float getPrice() {
+        return 0.00f;
     }
 }
 
