@@ -1,3 +1,4 @@
+import org.example.LineManager;
 import org.example.Main;
 import org.junit.Test;
 
@@ -8,16 +9,16 @@ import static junit.framework.Assert.assertEquals;
 public class MainTest {
     @Test
     public void checkIfLineHasCorrectFormat() {
-        Main main = new Main();
+        LineManager lineManager = new LineManager();
         System.out.println("Check correct format");
-        assertEquals(true, main.isLineValid("2015-02-01 S MR"));
-        assertEquals(true, main.isLineValid("2015-02-24 L LP"));
+        assertEquals(true, lineManager.isLineValid("2015-02-01 S MR"));
+        assertEquals(true, lineManager.isLineValid("2015-02-24 L LP"));
         System.out.println("Check incorrect format");
-        assertEquals(false, main.isLineValid("2015-02-29 CUSPS"));
+        assertEquals(false, lineManager.isLineValid("2015-02-29 CUSPS"));
         System.out.println("Check empty line");
-        assertEquals(false, main.isLineValid(""));
+        assertEquals(false, lineManager.isLineValid(""));
         System.out.println("Check gibber");
-        assertEquals(false, main.isLineValid("asfdsf453542q5"));
+        assertEquals(false, lineManager.isLineValid("asfdsf453542q5"));
     }
 }
 
