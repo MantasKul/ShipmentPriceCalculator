@@ -36,10 +36,12 @@ public class Main {
 
                     // Setting the date to previous date for next calculations
                     lineManager.setPreviousDate(lineManager.getCurrentDate());
+
+                    System.out.println(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
                 } else {
                     nextLine = nextLine + " Ignored";
                     // writeFile(nextLine);
-                    System.out.println(nextLine);
+                    //System.out.println(nextLine);
                 }
             }
         } catch (Exception e) {

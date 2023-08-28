@@ -11,9 +11,17 @@ import java.util.regex.Pattern;
 public class LineManager {
     private LocalDate previousDate;
     private LocalDate currentDate;
-    private float discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
+
     private String currentProvider;
     private char currentSize;
+
+    private float discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
+    private float discount;
+    private float price = 0f;
+
+    private int largePackageStreak = 0;
+    private boolean largePackageDiscountedThisMonth = false;
+
 
     public boolean isLineValid(String line) {
         // Regex to check if format is correct WIP: "\d{4}-\d{2}-\d{2} [S,M,L] (LP|MR)"
@@ -22,11 +30,33 @@ public class LineManager {
     }
 
     public void calculateDiscount() {
+        discount = 0;
         if(isNewMonth()) {
             discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
+            largePackageDiscountedThisMonth = false;
+        }
+
+        for(ShippingPrices sp : Constants.SHIPPING_PRICES) {
+            //System.out.println(sp.getProvider() + " --- " + currentProvider);
+            //System.out.println(sp.getSize() + " --- " + currentSize);
+            if(currentProvider.equals(sp.getProvider()) && sp.getSize() == currentSize) {
+                price = sp.getPrice();
+            }
+        }
+
+        if(discountLeft > 0) {
+            //System.out.println("CURRENT PRICE: " + price);
+            if (currentSize == 'S') {
+                //System.out.print("ITEM WAS S PRICE ADJUSTED. ");
+                getCheapestSmall();
+                //System.out.println("NEW PRICE" + price + " DISCOUNTED: " + discount);
+            }
+
+            // if(currentSize == 'L')
         }
     }
 
+    // If it's a new month set the discountLeft back to 10.00
     public boolean isNewMonth() {
         // previousDate will be null if it's first line entry
         if(previousDate == null) return false;
@@ -34,6 +64,20 @@ public class LineManager {
             return true;
         }
         return false;
+    }
+
+    // Make sure to discount on S size packages if there's cheaper option
+    public void getCheapestSmall() {
+        float cheapestSmallPrice = price;
+        for(ShippingPrices sp : Constants.SHIPPING_PRICES) {
+            if(sp.getSize() == 'S' && sp.getPrice() < cheapestSmallPrice) {
+                cheapestSmallPrice = sp.getPrice();
+            }
+        }
+
+        discount = price - cheapestSmallPrice;
+        price -= discount;
+        discountLeft -= discount;
     }
 
 /*    public void setCurrentDate(String s) throws ParseException {
@@ -63,6 +107,7 @@ public class LineManager {
         }
     }*/
 
+    // Getters & Setters
     public void setCurrentDate(String s) {
         currentDate = LocalDate.parse(s);
     }
@@ -79,16 +124,20 @@ public class LineManager {
     public LocalDate getCurrentDate() {
         return currentDate;
     }
-
     public String getCurrentProvider() {
         return currentProvider;
     }
-
     public char getCurrentSize() {
         return currentSize;
     }
-
     public LocalDate getPreviousDate() {
         return previousDate;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+    public float getDiscount() {
+        return discount;
     }
 }

@@ -1,4 +1,3 @@
-import junit.framework.Assert;
 import org.example.LineManager;
 import org.junit.Test;
 
@@ -47,3 +46,4 @@ public class LineManagerTest {
 }
 
 // TODO: user parametrized unit tests
+// TODO: Use proper style/syntax for tests
