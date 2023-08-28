@@ -2,7 +2,10 @@ package org.example;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static org.example.Constants.SHIPPING_PRICES;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,15 +25,30 @@ public class Main {
                 String nextLine = sc.nextLine();
 
                 if(lineManager.isLineValid(nextLine)) {
-                    System.out.println(nextLine + " Valid");
+                    // Splitting and setting the line into date, size, provider
+                    String[] splitLine = nextLine.split(" ", 3);
+                    lineManager.setCurrentDate(splitLine[0]);
+                    lineManager.setCurrentSize(splitLine[1].charAt(0));
+                    lineManager.setCurrentProvider(splitLine[2]);
+
+                    // Calculating discount
+                    lineManager.calculateDiscount();
+
+                    // Setting the date to previous date for next calculations
+                    lineManager.setPreviousDate(lineManager.getCurrentDate());
                 } else {
-                    System.out.println(nextLine + " Ignored");
+                    nextLine = nextLine + " Ignored";
+                    // writeFile(nextLine);
+                    System.out.println(nextLine);
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to find a file");
         }
+    }
+
+    public static void writeFile() {
+        // TODO: Implement writing a line to a file
     }
 
 
