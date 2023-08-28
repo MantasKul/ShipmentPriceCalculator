@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Scanner;
@@ -37,11 +38,12 @@ public class Main {
                     // Setting the date to previous date for next calculations
                     lineManager.setPreviousDate(lineManager.getCurrentDate());
 
-                    System.out.println(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
+                    if(lineManager.getDiscount() > 0) System.out.println(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
+                    else System.out.println(nextLine + " " + lineManager.getPrice() + " " + "-");
                 } else {
                     nextLine = nextLine + " Ignored";
                     // writeFile(nextLine);
-                    //System.out.println(nextLine);
+                    System.out.println(nextLine);
                 }
             }
         } catch (Exception e) {

@@ -1,7 +1,10 @@
 package org.example;
 
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 public class Constants {

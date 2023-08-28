@@ -1,12 +1,6 @@
 package org.example;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LineManager {
     private LocalDate previousDate;
@@ -17,7 +11,7 @@ public class LineManager {
 
     private float discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
     private float discount;
-    private float price = 0f;
+    private float price = 0;
 
     private int largePackageStreak = 0;
     private boolean largePackageDiscountedThisMonth = false;
@@ -52,7 +46,13 @@ public class LineManager {
                 //System.out.println("NEW PRICE" + price + " DISCOUNTED: " + discount);
             }
 
-            // if(currentSize == 'L')
+            if(currentProvider.equals("LP") && currentSize == 'L'){
+                if(largePackageStreak == 2) {
+                    largePackageStreak = 0;
+                    largePackageDiscount();
+                }
+                else largePackageStreak++;
+            }
         }
     }
 
@@ -76,8 +76,26 @@ public class LineManager {
         }
 
         discount = price - cheapestSmallPrice;
-        price -= discount;
-        discountLeft -= discount;
+        if(discountLeft >= discount) {
+            price -= discount;
+            discountLeft -= discount;
+        } else {
+            discount = discountLeft;
+            price -= discount;
+            discountLeft = 0;
+        }
+    }
+
+    public void largePackageDiscount() {
+        if(discountLeft >= price) {
+            discountLeft -= price;
+            discount = price;
+            price = 0;
+        } else {
+            price -= discountLeft;
+            discount = discountLeft;
+            discountLeft = 0;
+        }
     }
 
 /*    public void setCurrentDate(String s) throws ParseException {
