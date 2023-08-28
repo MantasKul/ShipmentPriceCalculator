@@ -1,6 +1,9 @@
 package org.example;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Objects;
@@ -38,11 +41,17 @@ public class Main {
                     // Setting the date to previous date for next calculations
                     lineManager.setPreviousDate(lineManager.getCurrentDate());
 
-                    if(lineManager.getDiscount() > 0) System.out.println(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
-                    else System.out.println(nextLine + " " + lineManager.getPrice() + " " + "-");
+                    if(lineManager.getDiscount() > 0) {
+                        writeFile(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
+                        System.out.println(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
+                    }
+                    else {
+                        writeFile(nextLine + " " + lineManager.getPrice() + " " + "-");
+                        System.out.println(nextLine + " " + lineManager.getPrice() + " " + "-");
+                    }
                 } else {
                     nextLine = nextLine + " Ignored";
-                    // writeFile(nextLine);
+                    writeFile(nextLine);
                     System.out.println(nextLine);
                 }
             }
@@ -51,8 +60,10 @@ public class Main {
         }
     }
 
-    public static void writeFile() {
-        // TODO: Implement writing a line to a file
+    public static void writeFile(String s) throws IOException {
+        BufferedWriter write = new BufferedWriter(new FileWriter("output.txt", true));
+        write.append(s + "\n");
+        write.close();
     }
 
 
