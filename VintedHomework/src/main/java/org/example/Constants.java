@@ -1,21 +1,18 @@
 package org.example;
 
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 public class Constants {
-    public static final float MONTHLY_DISCOUNT_AMMOUNT = 10.00f;
+    public static final int MONTHLY_DISCOUNT_AMOUNT = 1000;
 
-    public static List<ShippingPrices> SHIPPING_PRICES = new ArrayList<>() {{
-        add(new ShippingPrices("LP", 'S', 1.50f));
-        add(new ShippingPrices("LP", 'M', 4.90f));
-        add(new ShippingPrices("LP", 'L', 6.90f));
-        add(new ShippingPrices("MR", 'S', 2f));
-        add(new ShippingPrices("MR", 'M', 3f));
-        add(new ShippingPrices("MR", 'L', 4f));
+    public static List<ShippingInfo> SHIPPING_PRICES = new ArrayList<>() {{
+        add(new ShippingInfo("LP", 'S', 150));
+        add(new ShippingInfo("LP", 'M', 490));
+        add(new ShippingInfo("LP", 'L', 690));
+        add(new ShippingInfo("MR", 'S', 200));
+        add(new ShippingInfo("MR", 'M', 300));
+        add(new ShippingInfo("MR", 'L', 400));
     }};
 }

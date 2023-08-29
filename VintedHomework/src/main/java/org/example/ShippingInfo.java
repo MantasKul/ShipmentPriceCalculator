@@ -1,15 +1,11 @@
 package org.example;
 
-import java.math.BigDecimal;
-import java.util.Currency;
-import java.util.List;
-
-public class ShippingPrices {
+public class ShippingInfo {
     private String provider;
     private char size;
-    private float price;
+    private int price;
 
-    ShippingPrices(String provider, char size, float price) {
+    ShippingInfo(String provider, char size, int price) {
         this.provider = provider;
         this.size = size;
         this.price = price;
@@ -23,7 +19,7 @@ public class ShippingPrices {
         return size;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 

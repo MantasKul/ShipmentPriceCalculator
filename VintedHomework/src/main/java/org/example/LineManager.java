@@ -9,9 +9,9 @@ public class LineManager {
     private String currentProvider;
     private char currentSize;
 
-    private float discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
-    private float discount;
-    private float price = 0;
+    private int discountLeft = Constants.MONTHLY_DISCOUNT_AMOUNT;
+    private int discount;
+    private int price = 0;
 
     private int largePackageStreak = 0;
     private boolean largePackageDiscountedThisMonth = false;
@@ -26,11 +26,11 @@ public class LineManager {
     public void calculateDiscount() {
         discount = 0;
         if(isNewMonth()) {
-            discountLeft = Constants.MONTHLY_DISCOUNT_AMMOUNT;
+            discountLeft = Constants.MONTHLY_DISCOUNT_AMOUNT;
             largePackageDiscountedThisMonth = false;
         }
 
-        for(ShippingPrices sp : Constants.SHIPPING_PRICES) {
+        for(ShippingInfo sp : Constants.SHIPPING_PRICES) {
             //System.out.println(sp.getProvider() + " --- " + currentProvider);
             //System.out.println(sp.getSize() + " --- " + currentSize);
             if(currentProvider.equals(sp.getProvider()) && sp.getSize() == currentSize) {
@@ -68,8 +68,8 @@ public class LineManager {
 
     // Make sure to discount on S size packages if there's cheaper option
     public void getCheapestSmall() {
-        float cheapestSmallPrice = price;
-        for(ShippingPrices sp : Constants.SHIPPING_PRICES) {
+        int cheapestSmallPrice = price;
+        for(ShippingInfo sp : Constants.SHIPPING_PRICES) {
             if(sp.getSize() == 'S' && sp.getPrice() < cheapestSmallPrice) {
                 cheapestSmallPrice = sp.getPrice();
             }
@@ -98,33 +98,6 @@ public class LineManager {
         }
     }
 
-/*    public void setCurrentDate(String s) throws ParseException {
-        Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-        Matcher matcher = pattern.matcher(s);
-
-        if(matcher.find()) {
-            currentDate = LocalDate.parse(matcher.group());
-        }
-    }
-
-    public void setCurrentProvider(String s) {
-        Pattern pattern = Pattern.compile("( LP| MR)");
-        Matcher matcher = pattern.matcher(s);
-
-        if(matcher.find()) {
-            currentProvider = matcher.group();
-        }
-    }
-
-    public void setCurrentSize(String s) {
-        Pattern pattern = Pattern.compile("( S | M | L )");
-        Matcher matcher = pattern.matcher(s);
-
-        if(matcher.find()) {
-            currentSize = matcher.group().charAt(0);
-        }
-    }*/
-
     // Getters & Setters
     public void setCurrentDate(String s) {
         currentDate = LocalDate.parse(s);
@@ -152,10 +125,13 @@ public class LineManager {
         return previousDate;
     }
 
-    public float getPrice() {
-        return price;
+    public String getPrice() {
+        String zero = price % 100 == 0 ? "0" : "";
+        return price / 100 + "." + price % 100 + zero;
     }
-    public float getDiscount() {
-        return discount;
+    public String getDiscount() {
+        if(discount == 0) return "-";
+        String zero = discount % 100 == 0 ? "0" : "";
+        return discount / 100 + "." + discount % 100 + zero;
     }
 }
