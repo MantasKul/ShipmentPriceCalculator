@@ -16,9 +16,7 @@ public class LineManager {
     private int largePackageStreak = 0;
     private boolean largePackageDiscountedThisMonth = false;
 
-
     public boolean isLineValid(String line) {
-        // Regex to check if format is correct WIP: "\d{4}-\d{2}-\d{2} [S,M,L] (LP|MR)"
         if (line.matches("\\d{4}-\\d{2}-\\d{2} [S,M,L] (LP|MR)")) return true;
         return false;
     }

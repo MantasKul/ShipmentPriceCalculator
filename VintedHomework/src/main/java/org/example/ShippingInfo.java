@@ -22,11 +22,4 @@ public class ShippingInfo {
     public int getPrice() {
         return price;
     }
-
-    @Override
-    public String toString() {
-        return "PROVIDER : " + provider +
-                ", SIZE : " + size +
-                ", PRICE : " + price;
-    }
 }
