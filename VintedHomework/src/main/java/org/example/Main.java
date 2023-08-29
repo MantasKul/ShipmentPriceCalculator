@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -18,7 +17,7 @@ public class Main {
 
         try {
             URL url = Main.class.getClassLoader().getResource("input.txt");
-            File file = new File(url.toURI());//new File(System.getProperty("user.dir") + "\\src\\main\\resources\\input.txt");
+            File file = new File(url.toURI());
 
             Scanner sc = new Scanner(file);
 
@@ -38,15 +37,13 @@ public class Main {
                     // Setting the date to previous date for next calculations
                     lineManager.setPreviousDate(lineManager.getCurrentDate());
 
-                    System.out.println(lineManager.getDiscount());
                     if(lineManager.getDiscount() != "0.0") {
-                        writeFile(nextLine + " " + lineManager.getPrice() + " " + lineManager.getDiscount());
-                    }
-                    else {
-                        writeFile(nextLine + " " + lineManager.getPrice() + " " + "-");
+                        writeFile(lineManager.toString());
+                    } else {
+                        writeFile(lineManager.toString());
                     }
                 } else {
-                    nextLine = nextLine + " Ignored";
+                    nextLine += " Ignored";
                     writeFile(nextLine);
                 }
             }
@@ -55,19 +52,14 @@ public class Main {
         }
     }
 
-    public static void writeFile(String s) throws IOException {
-        BufferedWriter write = new BufferedWriter(new FileWriter("output.txt", true));
-        write.append(s + "\n");
-        write.close();
+    public static void writeFile(String s) {
+        try {
+            FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "\\src\\main\\resources\\output.txt", true);
+            BufferedWriter write = new BufferedWriter(fileWriter);
+            write.append(s + "\n");
+            write.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
-
 }
-
-/*
-    Read file
-    Check if line syntax/pattern of line is correct
-    keep track of month (for discount rules)
-    add price to the line
-    subtract price by following the rules
- */
