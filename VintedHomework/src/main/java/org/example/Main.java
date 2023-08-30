@@ -13,7 +13,8 @@ public class Main {
     }
 
     public static void readFile() {
-        LineManager lineManager = new LineManager();
+        Line line = new Line();
+        PriceCalculator priceCalculator = new PriceCalculator();
 
         try {
             URL url = Main.class.getClassLoader().getResource("input.txt");
@@ -24,23 +25,20 @@ public class Main {
             while(sc.hasNextLine()) {
                 String nextLine = sc.nextLine();
 
-                if(lineManager.isLineValid(nextLine)) {
+                if(line.isFormatCorrect(nextLine)) {
                     // Splitting and setting the line into date, size, provider
-                    String[] splitLine = nextLine.split(" ", 3);
-                    lineManager.setCurrentDate(splitLine[0]);
-                    lineManager.setCurrentSize(splitLine[1].charAt(0));
-                    lineManager.setCurrentProvider(splitLine[2]);
+                    line.splitLine(nextLine);
 
-                    // Calculating discount
-                    lineManager.calculateDiscount();
+                    // Calculating price/discount
+                    priceCalculator.checkForDiscount(line);
 
                     // Setting the date to previous date for next calculations
-                    lineManager.setPreviousDate(lineManager.getCurrentDate());
+                    //lineManager.setPreviousDate(lineManager.getCurrentDate());
 
-                    if(lineManager.getDiscount() != "0.0") {
-                        writeFile(lineManager.toString());
+                    if(priceCalculator.getDiscount() != 0) {
+                        writeFile(line + " " + priceCalculator);
                     } else {
-                        writeFile(lineManager.toString());
+                        writeFile(line + " " + priceCalculator);
                     }
                 } else {
                     nextLine += " Ignored";
