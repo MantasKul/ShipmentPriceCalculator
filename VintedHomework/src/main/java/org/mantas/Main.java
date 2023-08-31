@@ -1,9 +1,6 @@
-package org.example;
+package org.mantas;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -17,13 +14,11 @@ public class Main {
         PriceCalculator priceCalculator = new PriceCalculator();
 
         try {
-            URL url = Main.class.getClassLoader().getResource("input.txt");
-            File file = new File(url.toURI());
+            InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("input.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-            Scanner sc = new Scanner(file);
-
-            while(sc.hasNextLine()) {
-                String nextLine = sc.nextLine();
+            String nextLine;
+            while((nextLine = bufferedReader.readLine()) != null) {
 
                 if(line.isFormatCorrect(nextLine)) {
                     // Splitting and setting the line into date, size, provider
@@ -32,17 +27,12 @@ public class Main {
                     // Calculating price/discount
                     priceCalculator.checkForDiscount(line);
 
-                    // Setting the date to previous date for next calculations
-                    //lineManager.setPreviousDate(lineManager.getCurrentDate());
-
-                    if(priceCalculator.getDiscount() != 0) {
-                        writeFile(line + " " + priceCalculator);
-                    } else {
-                        writeFile(line + " " + priceCalculator);
-                    }
+                    //writeFile(line + " " + priceCalculator);
+                    System.out.println(line + " " + priceCalculator);
                 } else {
                     nextLine += " Ignored";
-                    writeFile(nextLine);
+                    //writeFile(nextLine);
+                    System.out.println(nextLine);
                 }
             }
         } catch (Exception e) {

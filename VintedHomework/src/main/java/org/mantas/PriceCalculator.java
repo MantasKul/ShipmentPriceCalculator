@@ -1,4 +1,4 @@
-package org.example;
+package org.mantas;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,6 @@ public class PriceCalculator {
     private LocalDate previousDate;
     private boolean largeLPDiscountedThisMonth;
     private int largePackageStreak;
-    private Line line;
 
     public PriceCalculator() {
         discountLeft = Constants.MONTHLY_DISCOUNT_AMOUNT;
@@ -101,62 +100,35 @@ public class PriceCalculator {
     }
 
     // Setters & Getters
-    public int getPrice() {
-        return price;
+    public void setPreviousDate(LocalDate previousDate) {
+        this.previousDate = previousDate;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
-    public int getDiscount() {
-        return discount;
-    }
-
     public void setDiscount(int discount) {
         this.discount = discount;
     }
 
-    public int getDiscountLeft() {
-        return discountLeft;
-    }
-
-    public void setDiscountLeft(int discountLeft) {
-        this.discountLeft = discountLeft;
-    }
-
-    public LocalDate getPreviousDate() {
-        return previousDate;
-    }
-
-    public void setPreviousDate(LocalDate previousDate) {
-        this.previousDate = previousDate;
-    }
-
-    public boolean isLargeLPDiscountedThisMonth() {
-        return largeLPDiscountedThisMonth;
-    }
-
-    public void setLargeLPDiscountedThisMonth(boolean largeLPDiscountedThisMonth) {
-        this.largeLPDiscountedThisMonth = largeLPDiscountedThisMonth;
-    }
-
-    public Line getLine() {
-        return line;
-    }
-
-    public void setLine(Line line) {
-        this.line = line;
-    }
-
     public String getPriceString() {
-        String zero = price % 100 == 0 ? "0" : "";
-        return price / 100 + "." + price % 100 + zero;
+        String preDot = Integer.toString(price / 100);
+        String postDot = "";//Integer.toString(price % 100);
+        if(price % 100 == 0) postDot += "00";
+        if(price % 100 < 10 && price % 100 > 0) postDot += "0" + price % 100;
+        if(price % 100 > 10) postDot += Integer.toString(price % 100);
+        return preDot + "." + postDot;
     }
+
     public String getDiscountString() {
         if (discount == 0) return "-";
-        String zero = discount % 100 == 0 ? "0" : "";
-        return discount / 100 + "." + discount % 100 + zero;
+        String preDot = Integer.toString(discount / 100);
+        String postDot = "";//Integer.toString(price % 100);
+        if(discount % 100 == 0) postDot += "00";
+        if(discount % 100 < 10 && discount % 100 > 0) postDot += "0" + discount % 100;
+        if(discount % 100 > 10) postDot += Integer.toString(discount % 100);
+        return preDot + "." + postDot;
     }
 
     @Override

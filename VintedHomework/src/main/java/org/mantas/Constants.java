@@ -1,4 +1,4 @@
-package org.example;
+package org.mantas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class Constants {
     public static final int MONTHLY_DISCOUNT_AMOUNT = 1000;
 
-    public static final List<ShippingInfo> SHIPPING_PRICES = new ArrayList<>() {{
+    public static final List<ShippingInfo> SHIPPING_PRICES = new ArrayList<ShippingInfo>() {{
         add(new ShippingInfo("LP", 'S', 150));
         add(new ShippingInfo("LP", 'M', 490));
         add(new ShippingInfo("LP", 'L', 690));

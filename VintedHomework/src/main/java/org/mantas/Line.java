@@ -1,4 +1,4 @@
-package org.example;
+package org.mantas;
 
 import java.time.LocalDate;
 
@@ -24,24 +24,12 @@ public class Line {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public char getSize() {
         return size;
     }
 
-    public void setSize(char size) {
-        this.size = size;
-    }
-
     public String getProvider() {
         return provider;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
     }
 
     @Override

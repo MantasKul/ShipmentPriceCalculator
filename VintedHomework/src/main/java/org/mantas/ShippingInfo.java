@@ -1,4 +1,4 @@
-package org.example;
+package org.mantas;
 
 public class ShippingInfo {
     private String provider;
