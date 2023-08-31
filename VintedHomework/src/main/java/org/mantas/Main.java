@@ -11,10 +11,8 @@ public class Main {
     PriceCalculator priceCalculator = new PriceCalculator();
 
     try {
-      InputStream inputStream = Main.class
-                                  .getClassLoader()
-                                  .getResourceAsStream("input.txt");
-      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+      FileReader fileReader = new FileReader(System.getProperty("user.dir") + "\\input.txt");
+      BufferedReader bufferedReader = new BufferedReader(fileReader);
 
       String nextLine;
       while((nextLine = bufferedReader.readLine()) != null) {
