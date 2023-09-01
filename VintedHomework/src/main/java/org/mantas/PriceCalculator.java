@@ -1,5 +1,6 @@
 package org.mantas;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PriceCalculator {
@@ -97,25 +98,15 @@ public class PriceCalculator {
     }
   }
 
-  // Data retrieval
+  // Data retrieval methods
   public String getPriceString() {
-    String preDot = Integer.toString(price / 100);
-    String postDot = "";//Integer.toString(price % 100);
-    if(price % 100 == 0) postDot += "00";
-    if(price % 100 < 10 && price % 100 > 0) postDot += "0" + price % 100;
-    if(price % 100 >= 10) postDot += Integer.toString(price % 100);
-    return preDot + "." + postDot;
+    return price / 100 + "." + String.format("%02d", price % 100);//preDot + "." + postDot;
   }
 
   public String getDiscountString() {
     if (discount == 0) return "-";
 
-    String preDot = Integer.toString(discount / 100);
-    String postDot = "";//Integer.toString(price % 100);
-    if(discount % 100 == 0) postDot += "00";
-    if(discount % 100 < 10 && discount % 100 > 0) postDot += "0" + discount % 100;
-    if(discount % 100 >= 10) postDot += Integer.toString(discount % 100);
-    return preDot + "." + postDot;
+    return discount / 100 + "." + String.format("%02d", discount % 100);//preDot + "." + postDot;
   }
 
   @Override

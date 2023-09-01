@@ -1,6 +1,8 @@
 package org.mantas;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class Main {
   public static void main(String[] args) {
@@ -11,6 +13,7 @@ public class Main {
     PriceCalculator priceCalculator = new PriceCalculator();
 
     try {
+      // Reading input from root project folder and not in resources so in build you could change input file without rebuild need
       FileReader fileReader = new FileReader(System.getProperty("user.dir") + "\\input.txt");
       BufferedReader bufferedReader = new BufferedReader(fileReader);
 
