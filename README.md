@@ -4,19 +4,24 @@
 - In the terminal run "java -jar "VintedHomework-1.0.0.jar" command
 
 # Running the tests
-- Install maven if it's not installed (https://maven.apache.org/install.html)
-- In the comman terminal navigate to the "VintedHomework" directory
+- Install Maven if it's not installed (https://maven.apache.org/install.html)
+- In the command terminal navigate to the "VintedHomework" directory
 - In the terminal run "mvn test" command
 
 # Decisions
-To make sure the code is clean and maintanable I've tried to follow Clean code principles as explained by Robert Cecil Martin.
-Main points would be:
+To make sure the code is clean and maintainable I've tried to follow Clean code principles as explained by Robert Cecil Martin.
+The main points would be:
 - Give meaningful names to variables functions classes
 - Methods should be small and do only one thing
 - Classes only have related data
 - Methods named as verbs
 - Classes named as nouns
 
-Due to these principles one can add new rules just by creating a new method of it and calling it in "discountCalculator" as well as modifying old rules by simply changing repsective methods
+Following this convention I've tried to make names clear, methods do only one thing and keep them as small as I can, classes have only related methods/variables in them, that's why Line and PriceCalculator are separate classes.
 
-For coding style I've based in on Google Java Style Guide: https://google.github.io/styleguide/javaguide.html
+For coding style, I've based it on the Google Java Style Guide: https://google.github.io/styleguide/javaguide.html
+
+I'm using int for money instead of BigDecimal as it takes less space and should be a bit faster technically, or at least faster until we're using 10+ digits.
+This is something that my inexperience might be causing, having someone more experienced to discuss this would help me come to a better conclusion about whether to use int or BigDecimal.
+
+While I've tried my best I'm sure there are things that could be improved and I'd love to discuss them and learn.

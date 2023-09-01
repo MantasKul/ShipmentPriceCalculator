@@ -1,6 +1,5 @@
 package org.mantas;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PriceCalculator {
@@ -41,8 +40,16 @@ public class PriceCalculator {
     }
   }
 
+  private void setPriceFromLine(Line line) {
+    for (ShippingInfo sp: Constants.SHIPPING_PRICES) {
+      if (line.getProvider().equals(sp.getProvider()) && sp.getSize() == line.getSize()) {
+        price = sp.getPrice();
+      }
+    }
+  }
+
   // If it's a new month set the discountLeft back to 10.00
-  public void resetVariablesIfNewMonth(LocalDate currentDate) {
+  private void resetVariablesIfNewMonth(LocalDate currentDate) {
     // previousDate will be null if it's first line entry
     if(previousDate != null) {
       if (previousDate.getMonth() != currentDate.getMonth() || previousDate.getYear() != currentDate.getYear()) {
@@ -55,7 +62,7 @@ public class PriceCalculator {
   }
 
   // Make sure to discount on S size packages if there's cheaper option
-  public void applySPackageDiscount() {
+  private void applySPackageDiscount() {
     int cheapestSmallPrice = price;
     // Checking if there's a provider with cheaper price than already chosen one
     for (ShippingInfo sp: Constants.SHIPPING_PRICES) {
@@ -75,7 +82,7 @@ public class PriceCalculator {
     }
   }
 
-  public void applyThirdLargeLPPackageDiscount() {
+  private void applyThirdLargeLPPackageDiscount() {
     largeLPPackageStreak = 0;
     largeLPDiscountedThisMonth = true;
 
@@ -90,20 +97,12 @@ public class PriceCalculator {
     }
   }
 
-  public void setPriceFromLine(Line line) {
-    for (ShippingInfo sp: Constants.SHIPPING_PRICES) {
-      if (line.getProvider().equals(sp.getProvider()) && sp.getSize() == line.getSize()) {
-        price = sp.getPrice();
-      }
-    }
-  }
-
   // Data retrieval methods
-  public String getPriceString() {
+  private String getPriceString() {
     return price / 100 + "." + String.format("%02d", price % 100);//preDot + "." + postDot;
   }
 
-  public String getDiscountString() {
+  private String getDiscountString() {
     if (discount == 0) return "-";
 
     return discount / 100 + "." + String.format("%02d", discount % 100);//preDot + "." + postDot;
