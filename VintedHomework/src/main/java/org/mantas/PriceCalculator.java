@@ -72,29 +72,24 @@ public class PriceCalculator {
     }
     // Discount will be 0 if there were no cheaper options
     discount = price - cheapestSmallPrice;
-    if (discountLeft >= discount) {
-      price -= discount;
-      discountLeft -= discount;
-    } else {
-      discount = discountLeft;
-      price -= discount;
-      discountLeft = 0;
-    }
+    calculateDiscount();
   }
 
   private void applyThirdLargeLPPackageDiscount() {
     largeLPPackageStreak = 0;
     largeLPDiscountedThisMonth = true;
+    discount = price;
+    calculateDiscount();
+  }
 
-    if (discountLeft >= price) {
-      discountLeft -= price;
-      discount = price;
-      price = 0;
+  private void calculateDiscount() {
+    if(discountLeft >= discount) {
+      discountLeft -= discount;
     } else {
-      price -= discountLeft;
       discount = discountLeft;
       discountLeft = 0;
     }
+    price -= discount;
   }
 
   // Data retrieval methods

@@ -1,7 +1,7 @@
 # Running the project build
 - Install java if it's not installed (https://www.java.com/en/download/help/download_options.html)
 - In the command terminal navigate to the "VintedHomework/target" directory
-- In the terminal run "java -jar "VintedHomework-1.0.0.jar" command
+- In the terminal run "java -jar VintedHomework-1.0.0.jar" command
 
 # Running the tests
 - Install Maven if it's not installed (https://maven.apache.org/install.html)
@@ -24,4 +24,4 @@ For coding style, I've based it on the Google Java Style Guide: https://google.g
 I'm using int for money instead of BigDecimal as it takes less space and should be a bit faster technically, or at least faster until we're using 10+ digits.
 This is something that my inexperience might be causing, having someone more experienced to discuss this would help me come to a better conclusion about whether to use int or BigDecimal.
 
-While I've tried my best I'm sure there are things that could be improved and I'd love to discuss them and learn.
+While I've tried my best to make the code as clean and optimized as I could I'm sure there are things that could be improved and I'd love to discuss them and learn.
