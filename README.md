@@ -1,3 +1,6 @@
+# About
+This was a task given by Vinted for a Web Developer position. While unfortunately I did not get the position I did get some extra practice and knowledge.
+
 # Running the project build
 - Install java if it's not installed (https://www.java.com/en/download/help/download_options.html)
 - In the command terminal navigate to the "VintedHomework/target" directory
