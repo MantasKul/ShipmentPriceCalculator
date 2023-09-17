@@ -9,28 +9,28 @@
 - In the terminal run "mvn test" command
 
 # Task description
-Given input such as this (date, package size, shipment provider):
-2015-02-01 S MR
-2015-02-02 S MR
-2015-02-03 L LP
-2015-02-05 S LP
-2015-02-06 S MR
-2015-02-06 L LP
-2015-02-07 L MR
-2015-02-08 M MR
-2015-02-09 L LP
-2015-02-10 L LP
-2015-02-10 S MR
-2015-02-10 S MR
-2015-02-11 L LP
-2015-02-12 M MR
-2015-02-13 M LP
-2015-02-15 S MR
-2015-02-17 L LP
-2015-02-17 S MR
-2015-02-24 L LP
-2015-02-29 CUSPS
-2015-03-01 S MR
+Given input such as this (date, package size, shipment provider): <br/>
+2015-02-01 S MR <br/>
+2015-02-02 S MR <br/>
+2015-02-03 L LP <br/>
+2015-02-05 S LP <br/>
+2015-02-06 S MR <br/>
+2015-02-06 L LP <br/>
+2015-02-07 L MR <br/>
+2015-02-08 M MR <br/>
+2015-02-09 L LP <br/>
+2015-02-10 L LP <br/>
+2015-02-10 S MR <br/>
+2015-02-10 S MR <br/>
+2015-02-11 L LP <br/>
+2015-02-12 M MR <br/>
+2015-02-13 M LP <br/>
+2015-02-15 S MR <br/>
+2015-02-17 L LP <br/>
+2015-02-17 S MR <br/>
+2015-02-24 L LP <br/>
+2015-02-29 CUSPS <br/>
+2015-03-01 S MR <br/>
 
 Calculate the discount and price of shipment following these rules:
   - All S shipments should always match the lowest S package price among the providers.
@@ -40,25 +40,25 @@ Calculate the discount and price of shipment following these rules:
 Output transactions and append reduced shipment price and a shipment discount (or '-' if there is none).
 If the line format is wrong, carrier/sizes are unrecognized 'Ignored' should be appended to the line.
 
-Example output of the given example input:
-2015-02-01 S MR 1.50 0.50
-2015-02-02 S MR 1.50 0.50
-2015-02-03 L LP 6.90 -
-2015-02-05 S LP 1.50 -
-2015-02-06 S MR 1.50 0.50
-2015-02-06 L LP 6.90 -
-2015-02-07 L MR 4.00 -
-2015-02-08 M MR 3.00 -
-2015-02-09 L LP 0.00 6.90
-2015-02-10 L LP 6.90 -
-2015-02-10 S MR 1.50 0.50
-2015-02-10 S MR 1.50 0.50
-2015-02-11 L LP 6.90 -
-2015-02-12 M MR 3.00 -
-2015-02-13 M LP 4.90 -
-2015-02-15 S MR 1.50 0.50
-2015-02-17 L LP 6.90 -
-2015-02-17 S MR 1.90 0.10
-2015-02-24 L LP 6.90 -
-2015-02-29 CUSPS Ignored
-2015-03-01 S MR 1.50 0.50
+Example output of the given example input:<br/>
+2015-02-01 S MR 1.50 0.50<br/>
+2015-02-02 S MR 1.50 0.50<br/>
+2015-02-03 L LP 6.90 -<br/>
+2015-02-05 S LP 1.50 -<br/>
+2015-02-06 S MR 1.50 0.50<br/>
+2015-02-06 L LP 6.90 -<br/>
+2015-02-07 L MR 4.00 -<br/>
+2015-02-08 M MR 3.00 -<br/>
+2015-02-09 L LP 0.00 6.90<br/>
+2015-02-10 L LP 6.90 -<br/>
+2015-02-10 S MR 1.50 0.50<br/>
+2015-02-10 S MR 1.50 0.50<br/>
+2015-02-11 L LP 6.90 -<br/>
+2015-02-12 M MR 3.00 -<br/>
+2015-02-13 M LP 4.90 -<br/>
+2015-02-15 S MR 1.50 0.50<br/>
+2015-02-17 L LP 6.90 -<br/>
+2015-02-17 S MR 1.90 0.10<br/>
+2015-02-24 L LP 6.90 -<br/>
+2015-02-29 CUSPS Ignored<br/>
+2015-03-01 S MR 1.50 0.50<br/>
