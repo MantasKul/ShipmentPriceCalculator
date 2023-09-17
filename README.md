@@ -8,20 +8,57 @@
 - In the command terminal navigate to the "VintedHomework" directory
 - In the terminal run "mvn test" command
 
-# Decisions
-To make sure the code is clean and maintainable I've tried to follow Clean code principles as explained by Robert Cecil Martin.
-The main points would be:
-- Give meaningful names to variables functions classes
-- Methods should be small and do only one thing
-- Classes only have related data
-- Methods named as verbs
-- Classes named as nouns
+# Task description
+Given input such as this (date, package size, shipment provider):
+2015-02-01 S MR
+2015-02-02 S MR
+2015-02-03 L LP
+2015-02-05 S LP
+2015-02-06 S MR
+2015-02-06 L LP
+2015-02-07 L MR
+2015-02-08 M MR
+2015-02-09 L LP
+2015-02-10 L LP
+2015-02-10 S MR
+2015-02-10 S MR
+2015-02-11 L LP
+2015-02-12 M MR
+2015-02-13 M LP
+2015-02-15 S MR
+2015-02-17 L LP
+2015-02-17 S MR
+2015-02-24 L LP
+2015-02-29 CUSPS
+2015-03-01 S MR
 
-Following this convention I've tried to make names clear, methods do only one thing and keep them as small as I can, classes have only related methods/variables in them, that's why Line and PriceCalculator are separate classes.
+Calculate the discount and price of shipment following these rules:
+  - All S shipments should always match the lowest S package price among the providers.
+  - The third L shipment via LP should be free, but only once a calendar month.
+  - Accumulated discounts cannot exceed 10 € in a calendar month. If there are not enough funds to fully cover a discount this calendar month, it should be covered partially.
 
-For coding style, I've based it on the Google Java Style Guide: https://google.github.io/styleguide/javaguide.html
+Output transactions and append reduced shipment price and a shipment discount (or '-' if there is none).
+If the line format is wrong, carrier/sizes are unrecognized 'Ignored' should be appended to the line.
 
-I'm using int for money instead of BigDecimal as it takes less space and should be a bit faster technically, or at least faster until we're using 10+ digits.
-This is something that my inexperience might be causing, having someone more experienced to discuss this would help me come to a better conclusion about whether to use int or BigDecimal.
-
-While I've tried my best to make the code as clean and optimized as I could I'm sure there are things that could be improved and I'd love to discuss them and learn.
+Example output of the given example input:
+2015-02-01 S MR 1.50 0.50
+2015-02-02 S MR 1.50 0.50
+2015-02-03 L LP 6.90 -
+2015-02-05 S LP 1.50 -
+2015-02-06 S MR 1.50 0.50
+2015-02-06 L LP 6.90 -
+2015-02-07 L MR 4.00 -
+2015-02-08 M MR 3.00 -
+2015-02-09 L LP 0.00 6.90
+2015-02-10 L LP 6.90 -
+2015-02-10 S MR 1.50 0.50
+2015-02-10 S MR 1.50 0.50
+2015-02-11 L LP 6.90 -
+2015-02-12 M MR 3.00 -
+2015-02-13 M LP 4.90 -
+2015-02-15 S MR 1.50 0.50
+2015-02-17 L LP 6.90 -
+2015-02-17 S MR 1.90 0.10
+2015-02-24 L LP 6.90 -
+2015-02-29 CUSPS Ignored
+2015-03-01 S MR 1.50 0.50
