@@ -21,6 +21,10 @@ public class Main {
           // Splitting and setting the line into date, size, provider
           line.splitLine(nextLine);
 
+          // Setting price for discount calculation
+          priceCalculator.setPriceFromLine(line);
+          // Resetting variables that refresh each month
+          priceCalculator.resetVariablesIfNewMonth(line.getDate());
           // Calculating price/discount
           priceCalculator.checkForDiscount(line);
 

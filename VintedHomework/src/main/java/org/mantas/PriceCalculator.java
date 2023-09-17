@@ -19,11 +19,6 @@ public class PriceCalculator {
   public void checkForDiscount(Line line) {
     discount = 0;
 
-    // Setting price for discount calculation
-    setPriceFromLine(line);
-    // Resetting variables that refresh each month
-    resetVariablesIfNewMonth(line.getDate());
-
     if(discountLeft > 0) {
       // All S shipments should always match the lowest S package price among the providers.
       if (line.getSize() == 'S') {
@@ -40,7 +35,7 @@ public class PriceCalculator {
     }
   }
 
-  private void setPriceFromLine(Line line) {
+  public void setPriceFromLine(Line line) {
     for (ShippingInfo sp: Constants.SHIPPING_PRICES) {
       if (line.getProvider().equals(sp.getProvider()) && sp.getSize() == line.getSize()) {
         price = sp.getPrice();
@@ -49,7 +44,7 @@ public class PriceCalculator {
   }
 
   // If it's a new month set the discountLeft back to 10.00
-  private void resetVariablesIfNewMonth(LocalDate currentDate) {
+  public void resetVariablesIfNewMonth(LocalDate currentDate) {
     // previousDate will be null if it's first line entry
     if(previousDate != null) {
       if (previousDate.getMonth() != currentDate.getMonth() || previousDate.getYear() != currentDate.getYear()) {

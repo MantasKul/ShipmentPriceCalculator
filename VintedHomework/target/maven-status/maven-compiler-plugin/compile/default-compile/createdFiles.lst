@@ -1,6 +1,6 @@
-org\mantas\ShippingInfo.class
-org\mantas\PriceCalculator.class
 org\mantas\Main.class
+org\mantas\ShippingInfo.class
 org\mantas\Constants.class
+org\mantas\PriceCalculator.class
 org\mantas\Line.class
 org\mantas\Constants$1.class
